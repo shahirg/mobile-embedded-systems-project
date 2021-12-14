@@ -38,10 +38,7 @@ from DstTst import check_dist
 from gpiozero import MotionSensor
 
 pir = MotionSensor(4)
-
 cam = PiCamera()
-
-
 
 while(True):
     pir.wait_for_motion()
