@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-def check_dist():
+def get_distance():
     distance = 130
     while distance > 120 or distance < 70:
 
@@ -26,7 +26,7 @@ def check_dist():
                 pulse_end = time.time()
 
             pulse_duration = pulse_end - pulse_start
-            distance = pulse_duration*18000
+            distance = pulse_duration*17150
             distance = round(distance,2)
 
             print("distance", distance)
@@ -35,4 +35,5 @@ def check_dist():
             GPIO.cleanup()
 
     return
+
 check_dist()
