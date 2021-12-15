@@ -7,7 +7,7 @@ import numpy as np
 PROJECT_DIR = '/home/pi/Documents/test/'
 # file to lock
 file_encrypt = input("Enter file path of file you want to encrypt:")
-
+file_encrypt = f'{PROJECT_DIR}test_encrypt.txt'
 #images
 upload = input('Would you like to upload images or take them now: (y/n)')
 

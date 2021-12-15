@@ -3,9 +3,9 @@ from cryptography.fernet import Fernet
 def generate_key(file_path):
     key = Fernet.generate_key()
 
-    with open(f'{file_path}/mykey.key', 'wb') as mykey:
+    with open(file_path, 'wb') as mykey:
         mykey.write(key)
-        
+
     return key
 
 def load_key(file_path):

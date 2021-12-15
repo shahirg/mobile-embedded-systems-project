@@ -35,5 +35,3 @@ def get_distance():
             GPIO.cleanup()
 
     return
-
-check_dist()

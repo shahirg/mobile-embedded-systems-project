@@ -3,15 +3,17 @@ from encryption import decrypt, load_key
 from gpiozero import MotionSensor
 from cam import take_picture
 from time import sleep
+from numpy import array
 import numpy as np
 import face_recognition as fr
 
 PROJECT_DIR = '/home/pi/Documents/test/'
 
 file_decrypt = input("Enter file path of file you want to decrypt:")
+file_decrypt = f'{PROJECT_DIR}test_encrypt.txt'
 
 with open(f'{PROJECT_DIR}encoding.txt', 'r') as f:
-    encoding = f.readlines()
+    encoding = f.read()
     print(encoding)
 
 known_encoding = eval(encoding)
