@@ -3,8 +3,10 @@ from gpiozero import MotionSensor
 
 pir = MotionSensor(4)
 cam = PiCamera()
-
-
+with open('/home/pi/Documents/test/encoding.txt', 'r') as f:
+    lines = f.readlines()
+    print(lines)
+    exit()
 
 while(True):
     pir.wait_for_motion()

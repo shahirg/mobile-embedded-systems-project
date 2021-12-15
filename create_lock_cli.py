@@ -10,25 +10,29 @@ upload = input('Would you like to upload images or take them now: (y/n)')
 #upload
 
 if upload == 'y':
-    upload_path = '/home/pi/Documents/test/sg0.jpg'
+    upload_path = '/home/pi/Documents/test/sg1.jpg'
     #upload_path = input("Enter file path of image 1:")
     known_image = face_recognition.load_image_file(upload_path)
 else:
 
     sleep(1)
     cam = PiCamera()
-
     cam.start_preview()
     #cam.rotation = 180
     sleep(3)
     cam.capture(f'/home/pi/Documents/test/known.jpg')
     known_image = face_recognition.load_image_file('/home/pi/Documents/test/known.jpg')
 
-known_encoding = face_recognition.face_encodings(known_image)[0]
-print(repr(known_encoding))
+try:
+    known_encoding = face_recognition.face_encodings(known_image)[0]
+    print(repr(known_encoding))
+except(IndexError):
+    print('Face not detected')
+    exit()
+
 
 with open('/home/pi/Documents/test/encoding.txt', 'w') as f:
-   f.write(np.array_repr(known_image))
+   f.write(np.array_repr(known_encoding))
 
 #np.savetxt('/home/pi/Documents/test/encoding2.txt', known_image.reshape(known_image.shape[0],-1))
 
@@ -43,14 +47,18 @@ cam = PiCamera()
 while(True):
     pir.wait_for_motion()
     print("Motion detected")
-
+    sleep(1)
     check_dist()
+    sleep(1)
     cam.start_preview()
-    cam.rotation = 180
+    #cam.rotation = 180
 
     sleep(5)
     cam.capture(f'/home/pi/Documents/test/unknown.jpg')
     cam.stop_preview()
+    cam.close()
+
+
     break
     sleep(2)
     #pir.wait_for_no_motion()
@@ -58,7 +66,11 @@ while(True):
     print("Motion stopped")
 
 unknown_image = face_recognition.load_image_file('/home/pi/Documents/test/unknown.jpg')
-unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
+try:
+    unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
+except(IndexError):
+    print('No Face Detected')
+    exit()
 results = face_recognition.compare_faces([known_encoding], unknown_encoding)
 print(results)
 if(results[0] == True):
