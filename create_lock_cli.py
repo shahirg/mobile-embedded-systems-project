@@ -5,16 +5,15 @@ import face_recognition as fr
 import numpy as np
 
 PROJECT_DIR = '/home/pi/Documents/test/'
+
 # file to lock
 file_encrypt = input("Enter file path of file you want to encrypt:")
-file_encrypt = f'{PROJECT_DIR}test_encrypt.txt'
-#images
+
+# upload image or take new 
 upload = input('Would you like to upload images or take them now: (y/n)')
 
-
 if upload == 'y':
-    upload_path = '/home/pi/Documents/test/sg1.jpg'
-    #upload_path = input("Enter file path of image 1:")
+    upload_path = input("Enter file path of image:")
     known_image = fr.load_image_file(upload_path)
 else:
     sleep(1)
@@ -22,16 +21,17 @@ else:
     known_image = fr.load_image_file(f'{PROJECT_DIR}known.jpg')
 
 try:
+    # get face encoding
     known_encoding = fr.face_encodings(known_image)[0]
-    print(repr(known_encoding))
 except(IndexError):
     print('Face not detected')
     exit()
 
-
+# store encoding in text file
 with open(f'{PROJECT_DIR}encoding.txt', 'w') as f:
    f.write(np.array_repr(known_encoding))
 
+# encrypt file
 key = generate_key(file_path=f'{PROJECT_DIR}mykey.key')
 encrypt(key=key,file_path=file_encrypt)
 
