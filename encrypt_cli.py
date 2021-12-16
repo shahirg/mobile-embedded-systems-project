@@ -1,6 +1,7 @@
 from cam import take_picture
 from time import sleep
 from encryption import generate_key, encrypt
+from pick import pick
 import face_recognition as fr
 import numpy as np
 
@@ -10,9 +11,11 @@ PROJECT_DIR = '/home/pi/Documents/test/'
 file_encrypt = input("Enter file path of file to encrypt:")
 
 # upload image or take new
-upload = input('Would you like to upload images or take them now: (y/n)')
+title = "Select Image Upload Option"
+options = ['Upload Image of Face', 'Take photo now']
+option, index = pick(options, title, indicator='=>')
 
-if upload == 'y':
+if index == 0:
     upload_path = input("Enter file path of image:")
     known_image = fr.load_image_file(upload_path)
 else:
