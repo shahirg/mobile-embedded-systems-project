@@ -20,15 +20,15 @@ known_encoding = eval(encoding)
 
 pir = MotionSensor(4)
 
-while(True):
-    # pause until motion detected
-    pir.wait_for_motion()
-    print("Motion detected")
-    sleep(1)
-    get_distance()
-    sleep(1)
-    take_picture(file_path=f'{PROJECT_DIR}unknown.jpg')
-    break
+
+# pause until motion detected
+pir.wait_for_motion()
+print("Motion detected")
+sleep(1)
+get_distance()
+sleep(1)
+take_picture(file_path=f'{PROJECT_DIR}unknown.jpg')
+
 
 unknown_image = fr.load_image_file(f'{PROJECT_DIR}unknown.jpg')
 try:

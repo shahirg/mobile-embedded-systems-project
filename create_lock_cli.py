@@ -9,7 +9,7 @@ PROJECT_DIR = '/home/pi/Documents/test/'
 # file to lock
 file_encrypt = input("Enter file path of file you want to encrypt:")
 
-# upload image or take new 
+# upload image or take new
 upload = input('Would you like to upload images or take them now: (y/n)')
 
 if upload == 'y':
@@ -34,6 +34,7 @@ with open(f'{PROJECT_DIR}encoding.txt', 'w') as f:
 # encrypt file
 key = generate_key(file_path=f'{PROJECT_DIR}mykey.key')
 encrypt(key=key,file_path=file_encrypt)
+print(f'{file_encrypt} encrypted')
 
 
 #np.savetxt('/home/pi/Documents/test/encoding2.txt', known_image.reshape(known_image.shape[0],-1))

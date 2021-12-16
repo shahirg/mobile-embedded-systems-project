@@ -3,7 +3,9 @@ import time
 
 def get_distance():
     distance = 130
-    while distance > 120 or distance < 70:
+    max_dist = 120
+    min_dist = 70
+    while distance > max_dist or distance < min_dist:
 
         try:
             GPIO.setmode(GPIO.BCM)
@@ -32,6 +34,10 @@ def get_distance():
             print("distance", distance)
 
         finally:
-            GPIO.cleanup()
+            if distance > max_dist:
+                print('move close')
+            elif distance < min_dist:
+                print('move away')
+            #GPIO.cleanup()
 
-    return
+    print('optimal distance achieved')
