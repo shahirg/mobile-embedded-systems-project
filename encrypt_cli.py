@@ -7,7 +7,7 @@ import numpy as np
 PROJECT_DIR = '/home/pi/Documents/test/'
 
 # file to lock
-file_encrypt = input("Enter file path of file you want to encrypt:")
+file_encrypt = input("Enter file path of file to encrypt:")
 
 # upload image or take new
 upload = input('Would you like to upload images or take them now: (y/n)')
@@ -35,35 +35,3 @@ with open(f'{PROJECT_DIR}encoding.txt', 'w') as f:
 key = generate_key(file_path=f'{PROJECT_DIR}mykey.key')
 encrypt(key=key,file_path=file_encrypt)
 print(f'{file_encrypt} encrypted')
-
-
-#np.savetxt('/home/pi/Documents/test/encoding2.txt', known_image.reshape(known_image.shape[0],-1))
-
-# sleep(5)
-
-# from distance import get_distance
-# from gpiozero import MotionSensor
-
-# pir = MotionSensor(4)
-
-# while(True):
-#     pir.wait_for_motion()
-#     print("Motion detected")
-#     sleep(1)
-#     get_distance()
-#     sleep(1)
-#     take_picture(file_path='/home/pi/Documents/test/unknown.jpg')
-#     break
-
-# unknown_image = face_recognition.load_image_file('/home/pi/Documents/test/unknown.jpg')
-# try:
-#     unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
-# except(IndexError):
-#     print('No Face Detected')
-#     exit()
-# results = face_recognition.compare_faces([known_encoding], unknown_encoding)
-# print(results)
-# if(results[0] == True):
-#     print('unlocked')
-# else:
-#     print('still locked')

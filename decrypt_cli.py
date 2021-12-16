@@ -10,7 +10,7 @@ import face_recognition as fr
 PROJECT_DIR = '/home/pi/Documents/test/'
 
 # file to decrypt
-file_decrypt = input("Enter file path of file you want to decrypt:")
+file_decrypt = input("Enter file path of file to decrypt:")
 
 # get known encoding of face
 with open(f'{PROJECT_DIR}encoding.txt', 'r') as f:
@@ -19,8 +19,6 @@ with open(f'{PROJECT_DIR}encoding.txt', 'r') as f:
 known_encoding = eval(encoding)
 
 pir = MotionSensor(4)
-
-
 # pause until motion detected
 pir.wait_for_motion()
 print("Motion detected")
@@ -28,7 +26,6 @@ sleep(1)
 get_distance()
 sleep(1)
 take_picture(file_path=f'{PROJECT_DIR}unknown.jpg')
-
 
 unknown_image = fr.load_image_file(f'{PROJECT_DIR}unknown.jpg')
 try:
@@ -46,4 +43,4 @@ if(results[0] == True):
     decrypt(key=key,file_path=file_decrypt)
     print('decrypted')
 else:
-    print('still encrypted')
+    print('Face did not match - still encrypted')
